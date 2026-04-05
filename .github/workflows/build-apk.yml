@@ -28,9 +28,9 @@ jobs:
       run: java -version
     
     - name: Build APK Debug
-      run: |
-        export GRADLE_OPTS="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"
-        ./gradlew assembleDebug --stacktrace --no-daemon
+      env:
+        GRADLE_OPTS: "-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"
+      run: ./gradlew assembleDebug --stacktrace --no-daemon
     
     - name: Check for APK
       if: always()
