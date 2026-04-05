@@ -1,0 +1,26 @@
+tasks:
+  - name: Build APK
+    init: |
+      echo "🚀 Aria2 Downloader Android — Gitpod Build"
+      echo "Setting up Gradle wrapper..."
+      chmod +x gradlew
+      echo "✅ Ready to build. Run: ./gradlew assembleDebug"
+    command: |
+      # Auto-build on workspace open (optional)
+      # Uncomment to auto-build:
+      # ./gradlew assembleDebug
+      # echo "✅ APK ready at: app/build/outputs/apk/debug/app-debug.apk"
+
+image:
+  file: .gitpod.Dockerfile
+
+vscode:
+  extensions:
+    - vscjava.language-java
+    - vscjava.vscode-java-debug
+    - Kotlin.language
+    - ms-vscode.makefile-tools
+
+ports:
+  - port: 8000
+    onOpen: ignore
