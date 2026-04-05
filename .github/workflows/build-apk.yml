@@ -11,24 +11,40 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Set up JDK 11
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '11'
-        distribution: 'adopt'
+        distribution: 'temurin'
     
     - name: Make gradlew executable
       run: chmod +x gradlew
     
-    - name: Build APK
-      run: ./gradlew assembleDebug
+    - name: Build APK with verbose output
+      run: ./gradlew assembleDebug --stacktrace --info
     
-    - name: Upload APK Artifact
+    - name: List build outputs
+      if: always()
+      run: find app/build/outputs -type f -name "*.apk" 2>/dev/null || echo "No APK found"
+    
+    - name: Upload APK to Release
       if: success()
       uses: actions/upload-artifact@v4
       with:
         name: app-debug-apk
         path: app/build/outputs/apk/debug/app-debug.apk
         retention-days: 30
+    
+    - name: Create Release
+      if: success()
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: apk-${{ github.run_number }}
+        release_name: APK Build ${{ github.run_number }}
+        draft: false
+        prerelease: false
