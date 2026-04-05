@@ -22,10 +22,10 @@ jobs:
         cache: 'gradle'
     
     - name: Make gradlew executable
-      run: chmod +x gradlew && ls -la gradlew
+      run: chmod +x gradlew
     
-    - name: Check Gradle version
-      run: ./gradlew --version
+    - name: Check Java version
+      run: java -version
     
     - name: Run Gradle clean
       run: ./gradlew clean
