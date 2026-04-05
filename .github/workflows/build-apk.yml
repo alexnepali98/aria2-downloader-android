@@ -27,11 +27,10 @@ jobs:
     - name: Check Java version
       run: java -version
     
-    - name: Run Gradle clean
-      run: ./gradlew clean
-    
-    - name: Build APK
-      run: ./gradlew assembleDebug --stacktrace
+    - name: Build APK Debug
+      run: |
+        export GRADLE_OPTS="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"
+        ./gradlew assembleDebug --stacktrace --no-daemon
     
     - name: Check for APK
       if: always()
