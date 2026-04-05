@@ -17,9 +17,7 @@ jobs:
         distribution: 'temurin'
     
     - name: Build APK
-      run: |
-        chmod +x gradlew
-        ./gradlew assembleDebug
+      run: bash build.sh
 
     - uses: actions/upload-artifact@v4
       if: success()
