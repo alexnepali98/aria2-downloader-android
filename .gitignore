@@ -1,0 +1,26 @@
+# Gradle files
+.gradle/
+build/
+*.apk
+*.aar
+
+# Android Studio
+.idea/
+*.iml
+local.properties
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# IDEs
+*.iws
+*.ipr
+*.ids
+*.orig
+
+# Git
+.git/
+.gitmodules
