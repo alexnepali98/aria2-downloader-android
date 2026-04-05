@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.23"
-agp = "8.2.2"
+agp = "8.1.4"
 compose-bom = "2024.02.00"
 material3 = "1.2.0"
 okhttp = "4.12.0"
