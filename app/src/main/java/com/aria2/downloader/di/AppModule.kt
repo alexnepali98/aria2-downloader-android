@@ -4,13 +4,13 @@ import android.content.Context
 import com.aria2.downloader.data.local.AppDatabase
 import com.aria2.downloader.data.repository.DownloadRepository
 import com.aria2.downloader.domain.engine.DownloadEngine
+import com.aria2.downloader.util.HttpClientFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -19,13 +19,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(true)
-            .build()
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context
+    ): OkHttpClient {
+        return HttpClientFactory.createHttpClient(context, enableLogging = false)
     }
 
     @Singleton

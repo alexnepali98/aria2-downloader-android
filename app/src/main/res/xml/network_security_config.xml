@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Allow cleartext (HTTP) traffic for testing/demo purposes -->
+    <!-- Remove this in production or restrict to specific domains -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">example.com</domain>
+        <domain includeSubdomains="true">test.com</domain>
+    </domain-config>
+
+    <!-- Default: require HTTPS for all other domains -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">*</domain>
+    </domain-config>
+
+    <!-- Certificate pinning (optional - remove if not needed) -->
+    <!-- <pin-set expiration="2026-12-31">
+        <pin digest="SHA-256">base64encodedCertificate==</pin>
+    </pin-set> -->
+</network-security-config>
